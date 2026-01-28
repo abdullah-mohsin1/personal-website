@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Space Portfolio • Projects</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/stars.css" />
+  </head>
+  <body>
+    <div class="stars-bg" aria-hidden="true">
+      <div id="stars" class="stars-layer"></div>
+      <div id="stars2" class="stars-layer"></div>
+      <div id="stars3" class="stars-layer"></div>
+    </div>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <header class="hud" data-hud>
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Abdullah's Portfolio</span>
+      </div>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation" aria-expanded="false">
+        Menu
+      </button>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/experience.html">Experience</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="glass" aria-labelledby="skills-title">
+        <h1 class="section-title" id="skills-title">Skills</h1>
+        <div class="grid grid-2">
+          <article class="card skill-card glass">
+            <h3>Languages &amp; Frameworks</h3>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">React</span>
+              <span class="chip">Node.js</span>
+            </div>
+          </article>
+          <article class="card skill-card glass">
+            <h3>Data &amp; Storage</h3>
+            <div class="chips">
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Redis</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Snowflake</span>
+            </div>
+          </article>
+          <article class="card skill-card glass">
+            <h3>AI &amp; ML</h3>
+            <div class="chips">
+              <span class="chip">PyTorch</span>
+              <span class="chip">Transformers</span>
+              <span class="chip">ML Ops</span>
+              <span class="chip">NLP</span>
+            </div>
+          </article>
+          <article class="card skill-card glass">
+            <h3>Tools &amp; Cloud</h3>
+            <div class="chips">
+              <span class="chip">Docker</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Vercel</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title">Featured Projects</h2>
+        <div class="grid grid-3">
+          <article class="card glass">
+            <h3>Project Aurora</h3>
+            <p>Short description of a standout build with impact, users, and results.</p>
+            <div class="chips">
+              <span class="chip">React</span>
+              <span class="chip">Node</span>
+              <span class="chip">Postgres</span>
+            </div>
+            <div class="project-links">
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </article>
+          <article class="card glass">
+            <h3>Project Nova</h3>
+            <p>Short description of the product, key features, and what you learned.</p>
+            <div class="chips">
+              <span class="chip">TypeScript</span>
+              <span class="chip">GraphQL</span>
+              <span class="chip">Cloudflare</span>
+            </div>
+            <div class="project-links">
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </article>
+          <article class="card glass">
+            <h3>Project Pulse</h3>
+            <p>Short description of data pipelines, automation, or a quant insight.</p>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">Airflow</span>
+              <span class="chip">BigQuery</span>
+            </div>
+            <div class="project-links">
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </article>
+          <article class="card glass">
+            <h3>Project Nebula</h3>
+            <p>Short description of a creative tool or interactive visualization.</p>
+            <div class="chips">
+              <span class="chip">Three.js</span>
+              <span class="chip">WebGL</span>
+              <span class="chip">Vite</span>
+            </div>
+            <div class="project-links">
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </article>
+          <article class="card glass">
+            <h3>Project Signal</h3>
+            <p>Short description of ML experimentation, deployment, and metrics.</p>
+            <div class="chips">
+              <span class="chip">PyTorch</span>
+              <span class="chip">MLflow</span>
+              <span class="chip">Docker</span>
+            </div>
+            <div class="project-links">
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </article>
+          <article class="card glass">
+            <h3>Project Atlas</h3>
+            <p>Short description of infrastructure, performance, or scale work.</p>
+            <div class="chips">
+              <span class="chip">Go</span>
+              <span class="chip">Kafka</span>
+              <span class="chip">Kubernetes</span>
+            </div>
+            <div class="project-links">
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/stars.js"></script>
+  </body>
+</html>

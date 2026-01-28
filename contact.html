@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Space Portfolio • Contact</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/stars.css" />
+  </head>
+  <body>
+    <div class="stars-bg" aria-hidden="true">
+      <div id="stars" class="stars-layer"></div>
+      <div id="stars2" class="stars-layer"></div>
+      <div id="stars3" class="stars-layer"></div>
+    </div>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <header class="hud" data-hud>
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Abdullah's Portfolio</span>
+      </div>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation" aria-expanded="false">
+        Menu
+      </button>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/experience.html">Experience</a>
+        <a href="/contact.html" aria-current="page">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="contact-layout" aria-labelledby="contact-title">
+        <div class="glass card">
+          <h1 class="section-title" id="contact-title">Contact Capsule</h1>
+          <p>Pick a channel to connect, collaborate, or chat about new missions.</p>
+          <div class="button-row">
+            <a class="btn" href="#">Email</a>
+            <a class="btn" href="#">LinkedIn</a>
+            <a class="btn" href="#">GitHub</a>
+            <a class="btn" href="#">Calendly</a>
+          </div>
+          <p class="footer-note">Replace links with real contact destinations.</p>
+        </div>
+        <div class="glass card">
+          <h2 class="section-title">Send a Message</h2>
+          <form class="form" aria-label="Contact form">
+            <label>
+              Name
+              <input type="text" placeholder="Your name" />
+            </label>
+            <label>
+              Email
+              <input type="email" placeholder="you@email.com" />
+            </label>
+            <label>
+              Message
+              <textarea placeholder="Tell me about your project..."></textarea>
+            </label>
+            <button class="btn" type="button">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/stars.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+.stars-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -2;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+.stars-layer {
+  position: absolute;
+  inset: 0;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  animation: animStar var(--star-duration, 50s) linear infinite;
+}
+
+.stars-layer::after {
+  content: '';
+  position: absolute;
+  top: 2000px;
+  width: inherit;
+  height: inherit;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+.star-header {
+  margin-top: 12px;
+}
+
+.skill-card {
+  min-height: 140px;
+}
+
+.project-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}

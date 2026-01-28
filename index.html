@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Space Portfolio • Landing</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/landing.css" />
+  </head>
+  <body class="landing-page">
+    <div class="bg-iframe landing" aria-hidden="true"></div>
+    <canvas id="space-canvas" aria-hidden="true"></canvas>
+    <script id="space-shader" type="x-shader/x-fragment">#version 300 es
+/*********
+* made by Matthias Hurrle (@atzedent)
+*/
+precision highp float;
+out vec4 O;
+uniform float time;
+uniform vec2 resolution;
+uniform vec2 touch;
+uniform int pointerCount;
+#define mouse (touch/R)
+#define P pointerCount
+#define FC gl_FragCoord.xy
+#define R resolution
+#define T time
+#define N normalize
+#define S smoothstep
+#define SE(v,a) S(a+1./MN,a-1./MN,v)
+#define TAU radians(360.)
+#define MN min(R.x,R.y)
+#define rot(a) mat2(cos((a)-vec4(0,11,33,0)))
+#define hue(a) (.5+.5*sin(TAU*(a)+vec3(1,2,3)))
+#define procd (T*.1)
+#define scene int(floor(mod(procd, 11.)))
+#define light sqrt(S(.0,.0125,sin(-1.57+6.28318*fract(procd))*.5+.5))
+#define sc (P>0?-1:scene)
+vec3 watermark() {
+	vec3 col=vec3(0);
+	float rel=R.x/R.y;
+	vec2 z=FC/R;
+	z.x*=rel;
+	z.x-=rel;
+	z+=vec2(.1,-.1);
+	float j=.025, id=round(z.y/j);
+	z.y-=clamp(round(z.y/j),-1.,1.)*j;
+	float rect=step(max(abs(z.x),abs(z.y)),.01);
+	return mix(col,sqrt(rect*hue(id/(TAU/2.))),.5);
+}
+float rnd(vec2 p) {
+	p=fract(p*vec2(12.9898,78.233));
+	p+=dot(p,p+34.56);
+	return fract(p.x*p.y);
+}
+float rnd(vec3 p) {
+	p=fract(p*vec3(12.9898,78.233,156.345));
+	p+=dot(p,p+34.56);
+	return fract(p.x*p.y*p.z);
+}
+float noise(vec2 p) {
+	vec2 i=floor(p), u=S(i,i+1.,p), k=vec2(1,0);
+	float
+	a=rnd(i),
+	b=rnd(i+k),
+	c=rnd(i+k.yx),
+	d=rnd(i+k.xx);
+	return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+}
+float fbm(vec2 p) {
+	float f=.0;
+	mat2 m=mat2(1.6,1.2,-1.2,1.6);
+	f+=.5000*noise(p); p*=m;
+	f+=.2500*noise(p); p*=m;
+	f+=.1250*noise(p); p*=m;
+	f+=.0625*noise(p);
+	return f;
+}
+float noise3(vec3 p) {
+	vec3 s=vec3(7,157,113), i=floor(p);
+	vec4 h=dot(i,s)+vec4(0,s.yz,s.y+s.z);
+	p-=i;
+	p=p*p*(3.-2.*p);
+	h=mix(fract(sin(h)*43758.5453),fract(sin(h+s.x)*43758.5453),p.x);
+	h.xy=mix(h.xz,h.yw,p.y);
+	return mix(h.x,h.y,p.z);
+}
+float fbm (vec3 p) {
+	float t=.0, a = 1., h = .0;
+	for (int i=0; i++<8;) {
+		t+=a*noise3(p);
+		p*=2.;
+		h+=a;
+		a/=2.;
+	}
+	return t/h;
+}
+vec3 blackbody(float a) {
+	vec3 col=clamp(vec3(
+		56100000.*pow(a,-1.5)+148.,
+		a>6500. ? 35200000.*pow(a,-1.5)+184. : 100.04*log(a)-623.6,
+		194.18*log(a)-1448.6
+	),0.,255.)/255.;
+	if (a<1000.) col*=a/1000.;
+	return col;
+}
+vec3 star(vec2 uv, float a) {
+	return blackbody(a*(1.-length(uv)));
+}
+float ftor(vec3 p, vec3 s, float r) {
+	vec2 c=vec2(length(p.xz)-s.x-s.z,p.y)+r;
+	c=abs(c)-s.zy;
+	return length(max(c,.0))+min(.0,max(c.x,c.y))-r;
+}
+vec2 pmod(vec2 p, float n) {
+	float a=atan(p.x,p.y), b=TAU/n;
+	return p*rot(round(a/b)*b);
+}
+float mat=.0;
+float map(vec3 p, bool z) {
+	p.z-=1.45;
+	p.y-=.2;
+	vec3 q=p;
+	p.xz*=rot(p.y*TAU/14.-T*.4);
+	p.x-=.5;
+	p.xz*=.25;
+	vec3 st=p; float k=.125, r=.05;
+	st.y=mod(p.y+.5,1.)-.5;
+	p.y=fract(p.y)-.5;
+	q.y=abs(abs(q.y)-.2)-.2;
+	float a=min(length(st+vec3(0,0,k))-r,length(p-vec3(0,0,k))-r),
+	b=ftor(q,vec3(1.35,.1,.125),1e-3);
+	mat=z?a<b?.0:1.:mat;
+	return min(a,b);
+}
+float map(vec3 p) { return map(p,false); }
+bool march(inout vec3 p, vec3 rd, out float dd) {
+	for (int i; i++<400;) {
+		float d=map(p,true);
+		if (abs(d)<1e-3) return true;
+		if (dd>40.) return false;
+		p+=rd*d;
+		dd+=d;
+	}
+  return false;
+}
+vec3 norm(vec3 p) {
+	float h=1e-3; vec2 k=vec2(-1,1);
+	return N(
+		k.xyy*map(p+k.xyy*h)+
+		k.yxy*map(p+k.yxy*h)+
+		k.yyx*map(p+k.yyx*h)+
+		k.xxx*map(p+k.xxx*h)
+	);
+}
+vec3 dir(vec2 uv, vec3 p, vec3 t, float z) {
+	vec3 up=vec3(0,1,0),
+	f=N(t-p),
+	r=N(cross(up,f)),
+	u=N(cross(f,r));
+	return N(mat3(r,u,f)*vec3(uv,z));
+}
+void cam(inout vec3 p) {
+	float yz=-mouse.y*6.3+3.14, xz=3.14-mouse.x*6.3;
+	switch (sc) {
+		case 0:
+			yz=-.0;
+			xz=-.78;
+			break;
+		case 1:
+			yz=-.0;
+			xz=-.0;
+			break;
+		case 2:
+			yz=-.05;
+			xz=cos(T*.2)*sin(T*.2);
+			break;
+		case 3:
+			yz=-.0;
+			xz=-2.4;
+			break;
+		case 4:
+			yz=.05;
+			xz=-2.4+.5*cos(TAU/4.+T*.05)*sin(T*.05);
+			break;
+		case 5:
+			yz=.1;
+			xz=.618;
+			break;
+		case 6:
+			yz=-.3-.2*cos(T*.2);
+			xz=-.4-.1*cos(T*.2);
+			break;
+		case 7:
+			yz=.25;
+			xz=.2-.2*cos(T*.2);
+			break;
+		case 8:
+			yz=-.125;
+			xz=.4;
+			break;
+		case 9:
+			yz=.2*cos(T*.05);
+			xz=3.8-.2*sin(T*.05);
+			break;
+		case 10:
+			yz=-.3;
+			xz=.1;
+			break;
+	}
+	p.yz*=rot(yz);
+	p.xz*=rot(xz);
+}
+vec3 sky(vec2 p) {
+	p.x-=.17;
+	p*=500.;
+	vec2 id=floor(p), gv=fract(p)-.5;
+	float n=rnd(id), d=length(gv), f=S(3e-2*n,1e-3*n,d*d);
+	if (n<.95) return vec3(0);
+	return hue(.1+TAU*rnd(id))*f+f*.6;
+}
+float shadow(vec3 p, vec3 lp) {
+	float shd=1., maxd=length(lp-p);
+	vec3 l=N(lp-p);
+	for (float i=1e-3; i<maxd;) {
+		float d=map(p+l*i);
+		if (d<1e-3) {
+			shd=.0;
+			break;
+		}
+		shd=min(shd,128.*d/i);
+		i+=d;
+	}
+	return shd;
+}
+float calcAO(vec3 p, vec3 n) {
+	float occ=.0, sca=.5;
+	for (float i=.0; i<5.; i++) {
+		float
+		h=.01+i*.09,
+		d=map(p+h*n);
+		occ+=(h-d)*sca;
+		sca*=.7;
+		if (occ>.35) break;
+	}
+	return clamp(1.-3.*occ,.0,1.)*(.5+.5*n.y);
+}
+vec3 render(vec2 uv) {
+	vec3 col=vec3(0),
+	p=vec3(0),
+	rd=dir(uv,p,vec3(0,0,1),sc==3||sc==9?.2:1.2);
+	cam(p); cam(rd);
+	float dd;
+	if (march(p,rd,dd)) {
+		vec3 n=norm(p), lp=vec3(0,1,5.), l=N(lp-p);
+		float dif=clamp(dot(l,n),.0,1.), spe=pow(clamp(dot(reflect(rd,n),l),.0,1.),32.),
+		fre=pow(clamp(1.+dot(rd,n),.0,1.),5.),
+		ao=calcAO(p,rd), shd=shadow(p+n*5e-3,lp),
+		pat=fbm(p*2.);
+		col+=.08+.5*dif*shd*ao;
+		col=mix(vec3(1,.9,.8)*spe*ao,col,fre);
+		col+=mat<1.?spe:.0;
+		col=mat>.0?mix(vec3(mix(-.05,.0,rnd(p))),col,pat):sqrt(col)*hue(-p.y*TAU);
+	} else {
+		vec2 sn=vec2(atan(rd.x,rd.z),atan(length(rd.xz),rd.y))/TAU;
+		col=3.*sky(sn*2.)+2.*sky(sn*1.5)+.65*sky(sn*2.2);
+		col+=.5*sky(sn*3.)+.65*sky(1.+sn*3.2);
+		vec2 s1v=(sn-vec2(0,.2))*100., s2v=(sn-vec2(.1,.25))*200.;
+		vec3 s1=star(s1v,4000.-3900.*fbm(sn*356.)), s2=star(s2v,800.);
+		col=min(col,length(s1v)-1.);
+		col=min(col,length(s2v)-1.);
+		col=max(s1,col);
+		col=max(s2,col);
+		s1v*=1.-fbm(s1v*1.4);
+		col+=.1*pow(3e-1/clamp(1e-3+dot(s1v,s1v),.0,1.),1.6)*vec3(1,.6,.5);
+		float s2f=.6*fbm(s2v*2.1);
+		s2v*=1.-s2f;
+		vec3 s2c=mix(vec3(.2,.7,.75),mix(vec3(1.5,1.2,.1),vec3(.2,1.2,1),s2f),s2f);
+		col+=.1*pow(2e-1/clamp(4e-2+dot(s2v,s2v),.0,1.),1.8)*s2c;
+		vec2 g1=vec2(1.6,2)*5.*(sn-vec2(0,.28));
+		g1*=rot(-.78)*(1.-fbm(g1*1.2));
+		float g1x=exp(-abs(3.*g1.x)), g1y=exp(-abs(10.*g1.y));
+		col=min(col,pow(42.*dot(g1,g1),4.));
+		col=max(
+			blackbody(mix(100.,2000.,g1x*g1y))*pow(g1y*g1x,1.2)*.5,
+			col
+		);
+		col+=.1*sqrt(3e-3/clamp(1e-5+dot(g1,g1),.0,1.));
+		vec2 g2=vec2(1,2)*5.*(sn-vec2(.38,.28));
+		float g2f=fbm(g2*4.4);
+		g2*=rot(-1.4)*2.*g2f;
+		col=min(col,pow(42.*dot(g2,g2),4.));
+		float g2x=exp(-abs(2.*g2.x)), g2y=exp(-abs(10.*g2.y));
+		col=max(
+			blackbody(mix(300.,1500.,g2x*g2y))*g2y*g2x,
+			col
+		);
+		col+=.2*pow(3e-3/clamp(1e-3+dot(g2,g2),.0,1.),1.2);
+		vec3 g2c=mix(vec3(.2,1.7,1.65),mix(vec3(1.5,1.2,.1),vec3(2.2,1.2,1),g2f),g2f*g2f);
+		col+=.1*pow(12e-2/clamp(9e-2+dot(g2,g2),.0,1.),8.)*g2c;
+	}
+	col+=exp(dd*1e-4)*vec3(.5,.8,1)*.2;
+	return col;
+}
+void main() {
+	vec2 uv=(FC-.5*R)/MN;
+	if (T>2. && P==0) {
+		float f=(.5+.5*sin(.1*TAU*T-TAU/3.+.5*rnd(round((FC/MN)*4.))))*30.;
+		uv/=tanh(f);
+	}
+	vec3 col=mix(vec3(0),render(uv),min(time*.3,1.)*(P>0?1.:light*light));
+	col=tanh(col*col);
+	col=sqrt(col);
+	uv=FC/R*2.-1.;
+	uv*=.9;
+	uv*=uv*uv*uv;
+	col=mix(col,vec3(0),dot(uv,uv));
+	col=max(col,.08);
+	/* watermark disabled for portfolio use */
+	/* col=max(col,watermark()); */
+	O=vec4(col,dot(col,vec3(.21,.71,.07)));
+}</script>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <header class="hud" data-hud>
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Abdullah's Portfolio</span>
+      </div>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation" aria-expanded="false">
+        Menu
+      </button>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/index.html" aria-current="page">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/experience.html">Experience</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-card glass">
+          <div class="hero-accent">
+            <div class="hero-avatar" role="img" aria-label="Placeholder avatar"></div>
+            <div class="hero-accent-line" aria-hidden="true"></div>
+          </div>
+          <div class="hero-meta">
+            <p class="hero-kicker">Hi, my name is</p>
+            <h1 class="hero-name" id="hero-title">Abdullah Mohsin</h1>
+            <p class="hero-subtitle">Computer Science Student at Queen's University</p>
+            <p class="hero-minor">Minor in economics</p>
+            <p class="typing" aria-live="polite">
+              <span data-typing></span>
+              <span aria-hidden="true">|</span>
+            </p>
+          </div>
+          <div class="button-row">
+            <a class="btn" href="#">GitHub</a>
+            <a class="btn" href="#">LinkedIn</a>
+            <a class="btn" href="#">Email</a>
+          </div>
+        </div>
+        <div class="glass hero-card">
+          <h2 class="section-title">Mission Snapshot</h2>
+          <p>
+            A short cinematic teaser about your focus, impact, and the kind of problems you
+            like to solve. Keep it crisp and futuristic.
+          </p>
+          <p>
+            Highlight a signature project, a research interest, or the vibe you want the
+            portfolio to communicate.
+          </p>
+        </div>
+      </section>
+
+      <section class="about" aria-labelledby="about-title">
+        <div class="about-media" role="img" aria-label="Placeholder hero image"></div>
+        <div class="glass about-text">
+          <h2 class="section-title" id="about-title">About • Beat Two</h2>
+          <p>
+            Placeholder bio line about background, passions, and how you got into tech.
+          </p>
+          <p>
+            Placeholder bio line about coursework, competitions, or research areas.
+          </p>
+          <p>
+            Placeholder bio line about what you're exploring next and who you'd love to work with.
+          </p>
+          <p class="footer-note">Scroll to explore projects, experience, and contact.</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/typing.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/landing-bg.js"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Space Portfolio • Experience</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/stars.css" />
+  </head>
+  <body>
+    <div class="stars-bg" aria-hidden="true">
+      <div id="stars" class="stars-layer"></div>
+      <div id="stars2" class="stars-layer"></div>
+      <div id="stars3" class="stars-layer"></div>
+    </div>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <header class="hud" data-hud>
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Abdullah's Portfolio</span>
+      </div>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation" aria-expanded="false">
+        Menu
+      </button>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/experience.html" aria-current="page">Experience</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="glass" aria-labelledby="experience-title">
+        <h1 class="section-title" id="experience-title">Experience Timeline</h1>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="glass card">
+              <h3>Software Engineer Intern • Company Name</h3>
+              <p class="hero-subtitle">May 2025 - Aug 2025</p>
+              <ul>
+                <li>Bullet about feature delivery, velocity, or impact.</li>
+                <li>Bullet about collaboration, ownership, or scale.</li>
+                <li>Bullet about data, performance, or reliability wins.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="glass card">
+              <h3>Research Assistant • Lab Name</h3>
+              <p class="hero-subtitle">Jan 2025 - May 2025</p>
+              <ul>
+                <li>Bullet about research focus, experiments, or papers.</li>
+                <li>Bullet about models, metrics, or datasets.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="glass card">
+              <h3>Full-Stack Developer • Student Org</h3>
+              <p class="hero-subtitle">Sep 2024 - Dec 2024</p>
+              <ul>
+                <li>Bullet about shipping a platform, onboarding, or UX.</li>
+                <li>Bullet about tools, deployment, or automation.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="glass card">
+              <h3>Hackathon Lead • Event Name</h3>
+              <p class="hero-subtitle">2023 - 2024</p>
+              <ul>
+                <li>Bullet about leadership, sponsorships, or community.</li>
+                <li>Bullet about building demos, mentoring, or judging.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/stars.js"></script>
+    <script src="/js/timeline.js"></script>
+  </body>
+</html>
