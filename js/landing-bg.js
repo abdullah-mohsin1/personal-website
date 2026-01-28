@@ -5,7 +5,7 @@
   if (!canvas || !source) return;
 
   // This shader is expensive at retina/full-res. Render at a reduced DPR for smoothness.
-  const resolutionFactor = 0.45; // tweak 0.35 - 1.0
+  const resolutionFactor = 0.32; // tweak 0.32 - 1.0
   const targetFps = 30; // tweak 24 - 60
 
   let dpr = Math.max(1, resolutionFactor * (window.devicePixelRatio || 1));

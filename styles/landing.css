@@ -59,9 +59,18 @@
 .hero-card--secondary {
   padding: 22px;
   gap: 12px;
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   text-align: left;
   align-content: start;
+}
+
+.hero-card--secondary p + p {
+  margin-top: 18px;
+}
+
+.draftworks-line {
+  font-size: 0.98rem;
+  white-space: nowrap;
 }
 
 .hero-card--secondary .section-title {
@@ -76,16 +85,15 @@
 }
 
 .about-media {
-  min-height: 260px;
+  min-height: 200px;
   border-radius: var(--radius);
   background: linear-gradient(135deg, rgba(102, 224, 255, 0.25), rgba(164, 123, 255, 0.2));
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
-  align-content: start;
-  padding: 18px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px 0;
 }
 
 .about-text {
@@ -117,6 +125,66 @@
 .accent-card:hover .accent-thumb {
   transform: scale(1.18);
   box-shadow: 0 12px 26px rgba(6, 12, 26, 0.45);
+}
+
+.tech-marquee {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
+}
+
+.tech-track {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.tech-item {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  border: 1px solid rgba(114, 170, 255, 0.25);
+  background-color: rgba(6, 12, 26, 0.3);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.tech-item.tech-python { background-image: url('../assets/icons/python.svg'); }
+.tech-item.tech-c { background-image: url('../assets/icons/c.svg'); }
+.tech-item.tech-javascript { background-image: url('../assets/icons/javascript.svg'); }
+.tech-item.tech-typescript { background-image: url('../assets/icons/typescript.svg'); }
+.tech-item.tech-java { background-image: url('../assets/icons/java.svg'); }
+.tech-item.tech-bash { background-image: url('../assets/icons/bash.svg'); }
+.tech-item.tech-react { background-image: url('../assets/icons/react.svg'); }
+.tech-item.tech-nodejs { background-image: url('../assets/icons/nodejs.svg'); }
+.tech-item.tech-spring { background-image: url('../assets/icons/spring.svg'); }
+.tech-item.tech-postgresql { background-image: url('../assets/icons/postgresql.svg'); }
+.tech-item.tech-mysql { background-image: url('../assets/icons/mysql.svg'); }
+.tech-item.tech-azure { background-image: url('../assets/icons/azure.svg'); }
+.tech-item.tech-flask { background-image: url('../assets/icons/flask.svg'); }
+.tech-item.tech-scikitlearn { background-image: url('../assets/icons/scikitlearn.svg'); }
+
+.tech-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(102, 224, 255, 0.55), rgba(164, 123, 255, 0.4));
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.tech-item:hover {
+  transform: scale(1.21);
+}
+
+.about-media:hover .tech-marquee {
+  cursor: pointer;
 }
 
 .about-text p + p {
