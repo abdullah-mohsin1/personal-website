@@ -59,7 +59,7 @@
 .hero-card--secondary {
   padding: 22px;
   gap: 12px;
-  font-size: 1.15rem;
+  font-size: 1.22rem;
   text-align: left;
   align-content: start;
 }
@@ -68,10 +68,6 @@
   margin-top: 18px;
 }
 
-.draftworks-line {
-  font-size: 0.98rem;
-  white-space: nowrap;
-}
 
 .hero-card--secondary .section-title {
   margin-bottom: 10px;
@@ -85,7 +81,7 @@
 }
 
 .about-media {
-  min-height: 200px;
+  min-height: 160px;
   border-radius: var(--radius);
   background: linear-gradient(135deg, rgba(102, 224, 255, 0.25), rgba(164, 123, 255, 0.2));
   border: 1px solid var(--border);
@@ -98,6 +94,11 @@
 
 .about-text {
   padding: 28px;
+}
+
+.draftworks-line {
+  font-size: 1.12rem;
+  margin-top: 8px;
 }
 
 .accent-card {
@@ -180,7 +181,8 @@
 }
 
 .tech-item:hover {
-  transform: scale(1.21);
+  transform: scale(1.25);
+  z-index: 1;
 }
 
 .about-media:hover .tech-marquee {
