@@ -33,7 +33,9 @@
   height: 200px;
   border-radius: 50%;
   border: 2px solid rgba(102, 224, 255, 0.6);
-  background: radial-gradient(circle at 30% 30%, rgba(102, 224, 255, 0.6), rgba(12, 18, 36, 0.9));
+  object-fit: cover;
+  object-position: 50% 66%;
+  transform: scale(1.1);
   box-shadow: 0 0 24px rgba(102, 224, 255, 0.4);
 }
 
@@ -49,6 +51,23 @@
   background: linear-gradient(90deg, rgba(102, 224, 255, 0.7), transparent);
 }
 
+.hero-card--primary {
+  padding: 32px;
+  gap: 20px;
+}
+
+.hero-card--secondary {
+  padding: 22px;
+  gap: 12px;
+  font-size: 1.08rem;
+  text-align: left;
+  align-content: start;
+}
+
+.hero-card--secondary .section-title {
+  margin-bottom: 10px;
+}
+
 .about {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -62,10 +81,42 @@
   background: linear-gradient(135deg, rgba(102, 224, 255, 0.25), rgba(164, 123, 255, 0.2));
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  align-content: start;
+  padding: 18px;
 }
 
 .about-text {
   padding: 28px;
+}
+
+.accent-card {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.accent-thumb {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  border: 1px solid rgba(114, 170, 255, 0.35);
+  background: linear-gradient(135deg, rgba(96, 214, 255, 0.35), rgba(164, 123, 255, 0.3));
+  box-shadow: 0 8px 20px rgba(6, 12, 26, 0.35);
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accent-card:hover .accent-thumb {
+  transform: scale(1.18);
+  box-shadow: 0 12px 26px rgba(6, 12, 26, 0.45);
 }
 
 .about-text p + p {
