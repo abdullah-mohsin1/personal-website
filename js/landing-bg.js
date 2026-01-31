@@ -15,6 +15,7 @@
   let lastFrame = 0;
   let smoothPointer = [0, 0];
   let smoothCoords = [0, 0];
+  const isCoarsePointer = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
   const easeInOutQuart = (x) =>
@@ -61,7 +62,9 @@
 
   function init() {
     renderer = new Renderer(canvas, dpr);
-    pointers = new PointerHandler(canvas, dpr);
+    // On touch devices, scrolling produces pointer events that make the background feel "glitchy".
+    // Disable touch-driven camera movement for coarse pointers (phones/tablets).
+    pointers = new PointerHandler(canvas, dpr, { allowTouch: !isCoarsePointer });
 
     resize();
     renderer.setup();
@@ -230,7 +233,8 @@
   }
 
   class PointerHandler {
-    constructor(canvas, scale) {
+    constructor(canvas, scale, opts = {}) {
+      const { allowTouch = true } = opts;
       this.canvas = canvas;
       this.scale = scale;
       this.active = false;
@@ -239,6 +243,7 @@
       this.moves = [0, 0];
 
       const shouldIgnore = (e) => {
+        if (!allowTouch && e && e.pointerType === 'touch') return true;
         const t = e.target;
         if (!t || !(t instanceof Element)) return false;
         // Don't start background-drag when interacting with UI controls.

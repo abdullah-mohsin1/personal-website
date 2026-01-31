@@ -13,6 +13,13 @@
   pointer-events: none;
 }
 
+@media (pointer: coarse) {
+  /* Let scrolling feel normal on touch devices and prevent touch-driven "camera" movement. */
+  #space-canvas {
+    touch-action: pan-y;
+  }
+}
+
 .landing-page .bg-overlay {
   background: radial-gradient(circle at top, rgba(20, 30, 60, 0.18), rgba(7, 9, 20, 0.45));
 }
