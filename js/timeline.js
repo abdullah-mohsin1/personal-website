@@ -1,5 +1,5 @@
 (() => {
-  const items = document.querySelectorAll('.timeline-item.reveal');
+  const items = document.querySelectorAll('.timeline-item.reveal, .exp-card.reveal');
   if (!items.length) return;
 
   const observer = new IntersectionObserver(

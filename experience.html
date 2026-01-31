@@ -32,48 +32,89 @@
     </header>
 
     <main class="page">
-      <section class="glass" aria-labelledby="experience-title">
-        <h1 class="section-title" id="experience-title">Experience Timeline</h1>
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <div class="glass card">
-              <h3>Software Engineer Intern • Company Name</h3>
-              <p class="hero-subtitle">May 2025 - Aug 2025</p>
-              <ul>
-                <li>Bullet about feature delivery, velocity, or impact.</li>
-                <li>Bullet about collaboration, ownership, or scale.</li>
-                <li>Bullet about data, performance, or reliability wins.</li>
-              </ul>
+      <section aria-labelledby="experience-title">
+        <h1 class="section-title" id="experience-title">Experience</h1>
+
+        <div class="exp-list">
+          <article class="glass exp-card reveal" aria-label="Expense Trend experience">
+            <img class="exp-logo-img" src="assets/experience/expense-trend.jpeg" alt="Expense Trend logo" />
+            <div class="exp-body">
+              <h2 class="exp-company">Expense Trend</h2>
+              <p class="exp-role">Full-Stack Software Developer Intern</p>
+              <p class="exp-meta">January 2026 - April 2026 | Remote</p>
+              <p class="exp-summary">Developing a React keyword analytics platform with Node.js APIs that process iOS keyword metrics to support fast search, filtering, and trend insights.</p>
+              <div class="chips" aria-label="Skills used">
+                <span class="chip">React</span>
+                <span class="chip">Node.js</span>
+                <span class="chip">Data Processing</span>
+                <span class="chip">Data Visualization</span>
+              </div>
             </div>
           </article>
-          <article class="timeline-item reveal">
-            <div class="glass card">
-              <h3>Research Assistant • Lab Name</h3>
-              <p class="hero-subtitle">Jan 2025 - May 2025</p>
-              <ul>
-                <li>Bullet about research focus, experiments, or papers.</li>
-                <li>Bullet about models, metrics, or datasets.</li>
-              </ul>
+
+          <article class="glass exp-card reveal" aria-label="DraftWorks experience">
+            <img class="exp-logo-img" src="assets/experience/draftworks.png" alt="DraftWorks logo" />
+            <div class="exp-body">
+              <h2 class="exp-company">DraftWorks</h2>
+              <p class="exp-role">Founder &amp; Software Engineer</p>
+              <p class="exp-meta">December 2025 - Present | Greater Toronto Area, ON</p>
+              <p class="exp-summary">Developed automation system for residential permit drawings.</p>
+              <div class="chips" aria-label="Skills used">
+                <span class="chip">Python</span>
+                <span class="chip">ETL</span>
+                <span class="chip">AutoCAD</span>
+              </div>
             </div>
           </article>
-          <article class="timeline-item reveal">
-            <div class="glass card">
-              <h3>Full-Stack Developer • Student Org</h3>
-              <p class="hero-subtitle">Sep 2024 - Dec 2024</p>
-              <ul>
-                <li>Bullet about shipping a platform, onboarding, or UX.</li>
-                <li>Bullet about tools, deployment, or automation.</li>
-              </ul>
+
+          <article class="glass exp-card reveal" aria-label="QMIND experience">
+            <img class="exp-logo-img" src="assets/experience/qmind.jpeg" alt="QMIND logo" />
+            <div class="exp-body">
+              <h2 class="exp-company">QMIND</h2>
+              <p class="exp-role">Machine Learning Engineer</p>
+              <p class="exp-meta">October 2025 - April 2026 | Kingston, ON</p>
+              <p class="exp-summary">Developing an ML multimodal follow-up imaging recommendation model by combining MedRAX outputs with patient metadata and notes-derived signals.</p>
+              <div class="chips" aria-label="Skills used">
+                <span class="chip">Python</span>
+                <span class="chip">SQL</span>
+                <span class="chip">Logistic Regression</span>
+                <span class="chip">ETL</span>
+                <span class="chip">Machine Learning</span>
+              </div>
             </div>
           </article>
-          <article class="timeline-item reveal">
-            <div class="glass card">
-              <h3>Hackathon Lead • Event Name</h3>
-              <p class="hero-subtitle">2023 - 2024</p>
-              <ul>
-                <li>Bullet about leadership, sponsorships, or community.</li>
-                <li>Bullet about building demos, mentoring, or judging.</li>
-              </ul>
+
+          <article class="glass exp-card reveal" aria-label="Synapsis Network experience">
+            <img class="exp-logo-img" src="assets/experience/synapsis.jpeg" alt="Synapsis Network logo" />
+            <div class="exp-body">
+              <h2 class="exp-company">Synapsis Network</h2>
+              <p class="exp-role">Web Developer</p>
+              <p class="exp-meta">January 2025 - April 2025 | Kingston, ON</p>
+              <p class="exp-summary">Built a responsive web platform with secure Google auth and submission APIs to streamline onboarding and reduce admin review effort.</p>
+              <div class="chips" aria-label="Skills used">
+                <span class="chip">React</span>
+                <span class="chip">Express.js</span>
+                <span class="chip">Node.js</span>
+                <span class="chip">MongoDB</span>
+                <span class="chip">CI/CD</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass exp-card reveal" aria-label="Queen's Game Development Club experience">
+            <img class="exp-logo-img" src="assets/experience/qgdc.jpeg" alt="Queen's Game Development Club logo" />
+            <div class="exp-body">
+              <h2 class="exp-company">Queen's Game Development Club</h2>
+              <p class="exp-role">Backend Developer</p>
+              <p class="exp-meta">January 2025 - April 2025 | Kingston, ON</p>
+              <p class="exp-summary">Implemented backend services to migrate Game Jam tracking from spreadsheets into the club website, enabling integrated submissions, management, and a project showcase.</p>
+              <div class="chips" aria-label="Skills used">
+                <span class="chip">TypeScript</span>
+                <span class="chip">SQL</span>
+                <span class="chip">REST API</span>
+                <span class="chip">MySQL</span>
+                <span class="chip">ETL</span>
+              </div>
             </div>
           </article>
         </div>
@@ -83,5 +124,6 @@
     <script src="/js/nav.js"></script>
     <script src="/js/stars.js"></script>
     <script src="/js/timeline.js"></script>
+    <script src="/js/experience-stack.js"></script>
   </body>
 </html>

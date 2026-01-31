@@ -32,40 +32,63 @@
     </header>
 
     <main class="page">
-      <section class="contact-layout" aria-labelledby="contact-title">
-        <div class="glass card">
-          <h1 class="section-title" id="contact-title">Contact Capsule</h1>
-          <p>Pick a channel to connect, collaborate, or chat about new missions.</p>
-          <div class="button-row">
-            <a class="btn" href="#">Email</a>
-            <a class="btn" href="#">LinkedIn</a>
-            <a class="btn" href="#">GitHub</a>
-            <a class="btn" href="#">Calendly</a>
-          </div>
-          <p class="footer-note">Replace links with real contact destinations.</p>
+      <section class="contact-hero" aria-labelledby="contact-title">
+        <div class="contact-title">
+          <span class="contact-line" aria-hidden="true"></span>
+          <h1 class="section-title" id="contact-title">Contact Me</h1>
         </div>
-        <div class="glass card">
-          <h2 class="section-title">Send a Message</h2>
-          <form class="form" aria-label="Contact form">
+        <div class="glass contact-card">
+          <h2 class="contact-card-title">Reach Out!</h2>
+          <!-- Submit to a hidden iframe so we can POST to Google Apps Script without CORS issues. -->
+          <iframe class="sr-only" name="contact_sink" title="Contact form submission target" aria-hidden="true"></iframe>
+          <form class="form contact-form" aria-label="Contact form" target="contact_sink" method="POST" enctype="application/x-www-form-urlencoded">
             <label>
-              Name
-              <input type="text" placeholder="Your name" />
+              <span class="sr-only">Name</span>
+              <input name="name" type="text" placeholder="Your Name" autocomplete="name" required />
             </label>
             <label>
-              Email
-              <input type="email" placeholder="you@email.com" />
+              <span class="sr-only">Email</span>
+              <input name="email" type="email" placeholder="Your Email" autocomplete="email" required />
+            </label>
+            <label class="sr-only" aria-hidden="true">
+              Company
+              <input name="company" type="text" tabindex="-1" autocomplete="off" />
             </label>
             <label>
-              Message
-              <textarea placeholder="Tell me about your project..."></textarea>
+              <span class="sr-only">Message</span>
+              <textarea name="message" placeholder="Your Message" required></textarea>
             </label>
-            <button class="btn" type="button">Send Message</button>
+            <input name="page" type="hidden" value="" />
+            <input name="userAgent" type="hidden" value="" />
+            <input name="ts" type="hidden" value="" />
+            <button class="btn" type="submit">Send Message</button>
+            <p class="footer-note" data-contact-status aria-live="polite"></p>
           </form>
         </div>
+        <div class="contact-links" aria-label="Contact links">
+          <a class="contact-icon" href="https://www.linkedin.com/in/abdullah-mohsin1" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4.98 3.5a2.5 2.5 0 1 1-.01 5.01A2.5 2.5 0 0 1 4.98 3.5Zm-2 6.5h4v10h-4V10Zm7 0h3.8v1.37h.05c.53-1 1.83-2.06 3.76-2.06 4.02 0 4.77 2.65 4.77 6.1V20h-4v-4.05c0-.97-.02-2.23-1.36-2.23-1.36 0-1.57 1.06-1.57 2.16V20h-4V10Z"></path>
+            </svg>
+          </a>
+          <a class="contact-icon" href="https://github.com/abdullah-mohsin1" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.23-3.37-1.23-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.07 1.53 1.07.9 1.57 2.36 1.12 2.94.85.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.33.1-2.77 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.35c.85 0 1.71.12 2.5.35 1.9-1.32 2.74-1.05 2.74-1.05.56 1.44.21 2.51.1 2.77.64.72 1.03 1.64 1.03 2.76 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.6.69.49A10.2 10.2 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"></path>
+            </svg>
+          </a>
+          <a class="contact-icon" href="mailto:abdullahmohsin010@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.2l8 4.8 8-4.8V7H4Zm16 10V9.1l-7.45 4.47a1 1 0 0 1-1.1 0L4 9.1V17h16Z"></path>
+            </svg>
+          </a>
+        </div>
+        <p class="contact-foot">Based in — Toronto, ON</p>
+        <p class="contact-foot">Developed by Abdullah Mohsin</p>
       </section>
     </main>
 
     <script src="/js/nav.js"></script>
     <script src="/js/stars.js"></script>
+    <script src="/js/contact.js"></script>
   </body>
 </html>

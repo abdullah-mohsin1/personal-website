@@ -37,12 +37,98 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.project-links .btn {
+  min-width: 132px;
+  text-align: center;
 }
 
 .contact-layout {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 28px;
+}
+
+.contact-hero {
+  display: grid;
+  gap: 28px;
+  place-items: center;
+  text-align: center;
+  padding-top: 24px;
+}
+
+.contact-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-line {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(102, 224, 255, 0.8), rgba(164, 123, 255, 0.6));
+  border-radius: 999px;
+}
+
+.contact-card {
+  width: min(520px, 100%);
+  padding: 28px;
+}
+
+.contact-card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(114, 170, 255, 0.35);
+  color: var(--text);
+}
+
+.contact-form .btn {
+  margin-top: 6px;
+  min-width: 200px;
+  align-self: center;
+}
+
+.contact-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(114, 170, 255, 0.35);
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.contact-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(6, 12, 26, 0.35);
+}
+
+.contact-foot {
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 @keyframes animStar {
