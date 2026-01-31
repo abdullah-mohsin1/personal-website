@@ -39,9 +39,7 @@
         </div>
         <div class="glass contact-card">
           <h2 class="contact-card-title">Reach Out!</h2>
-          <!-- Submit to a hidden iframe so we can POST to Google Apps Script without CORS issues. -->
-          <iframe class="sr-only" name="contact_sink" title="Contact form submission target" aria-hidden="true"></iframe>
-          <form class="form contact-form" aria-label="Contact form" target="contact_sink" method="POST" enctype="application/x-www-form-urlencoded">
+          <form class="form contact-form" aria-label="Contact form">
             <label>
               <span class="sr-only">Name</span>
               <input name="name" type="text" placeholder="Your Name" autocomplete="name" required />
@@ -58,9 +56,6 @@
               <span class="sr-only">Message</span>
               <textarea name="message" placeholder="Your Message" required></textarea>
             </label>
-            <input name="page" type="hidden" value="" />
-            <input name="userAgent" type="hidden" value="" />
-            <input name="ts" type="hidden" value="" />
             <button class="btn" type="submit">Send Message</button>
             <p class="footer-note" data-contact-status aria-live="polite"></p>
           </form>
@@ -82,7 +77,7 @@
             </svg>
           </a>
         </div>
-        <p class="contact-foot">Based in — Toronto, ON</p>
+        <p class="contact-foot">Based in - Toronto, ON</p>
         <p class="contact-foot">Developed by Abdullah Mohsin</p>
       </section>
     </main>

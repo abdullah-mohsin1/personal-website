@@ -4,20 +4,17 @@
 
   if (!form) return;
 
-  // 1) Deploy the Apps Script as a Web App and paste its URL here.
-  //    It will look like: https://script.google.com/macros/s/<SCRIPT_ID>/exec
-  let ENDPOINT = 'https://script.google.com/macros/s/AKfycbyyUlw5G9hr0ndKyBJSnkySC6Hxp-i-0ImfkPTpX8ct4hcDDmfeS33RrHVy8BmHXdbvqg/exec';
-  ENDPOINT = ENDPOINT.trim();
-  // Common copy/paste typo.
-  if (ENDPOINT.endsWith('/execE')) ENDPOINT = ENDPOINT.slice(0, -1);
+  // Google Apps Script Web App URL (ends with /exec)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWAw-bst2_zrMCyb2puA7zoC0stvS_04mcKqIHQsimZA7xBiszUpJJqGQIYZozF5hxeA/exec';
 
   const setStatus = (msg) => {
     if (statusEl) statusEl.textContent = msg;
   };
 
   form.addEventListener('submit', async (e) => {
-    if (!ENDPOINT || ENDPOINT.includes('PASTE_YOUR')) {
-      e.preventDefault();
+    e.preventDefault();
+
+    if (!SCRIPT_URL || SCRIPT_URL.includes('PASTE_')) {
       setStatus('Contact form is not configured yet (missing Google Apps Script URL).');
       return;
     }
@@ -37,23 +34,59 @@
     const message = (fd.get('message') || '').toString().trim();
 
     if (!name || !email || !message) {
-      e.preventDefault();
       setStatus('Please fill out name, email, and message.');
       return;
     }
 
-    // Submit as a standard form POST to avoid CORS / payload parsing issues.
-    form.action = ENDPOINT;
-    form.querySelector('input[name="page"]')?.setAttribute('value', window.location.href);
-    form.querySelector('input[name="userAgent"]')?.setAttribute('value', navigator.userAgent);
-    form.querySelector('input[name="ts"]')?.setAttribute('value', new Date().toISOString());
-
     setStatus('Sending...');
 
-    // We can't reliably read the response (cross-origin), so we optimistically confirm.
-    window.setTimeout(() => {
+    const payload = {
+      name,
+      email,
+      message,
+      page: window.location.href,
+      userAgent: navigator.userAgent,
+      ts: new Date().toISOString(),
+    };
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (data && data.ok === false) {
+        setStatus('Could not send message. Please try again.');
+        return;
+      }
+
       setStatus('Message sent. Thanks!');
       form.reset();
-    }, 500);
+    } catch (_) {
+      try {
+        // Fallback: form-encoded POST works great with Apps Script + no-cors (shows up as e.parameter).
+        const params = new URLSearchParams();
+        params.append('name', name);
+        params.append('email', email);
+        params.append('message', message);
+        params.append('page', window.location.href);
+        params.append('userAgent', navigator.userAgent);
+        params.append('ts', new Date().toISOString());
+
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: params.toString(),
+        });
+
+        setStatus('Message sent. Thanks!');
+        form.reset();
+      } catch (_) {
+        setStatus('Could not send message. Please try again.');
+      }
+    }
   });
 })();
