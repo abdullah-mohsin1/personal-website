@@ -103,9 +103,16 @@
   padding: 28px;
 }
 
-.draftworks-line {
+.focus-list {
   font-size: 1.12rem;
-  margin-top: 8px;
+  margin: 14px 0 0;
+  padding-left: 1.3rem;
+  display: grid;
+  gap: 12px;
+}
+
+.focus-list li::marker {
+  color: var(--accent);
 }
 
 .accent-card {
