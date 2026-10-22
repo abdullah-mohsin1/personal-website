@@ -43,6 +43,7 @@
               <span class="chip">Python</span>
               <span class="chip">Java</span>
               <span class="chip">C</span>
+              <span class="chip">C++</span>
               <span class="chip">JavaScript</span>
               <span class="chip">TypeScript</span>
               <span class="chip">Bash</span>
@@ -57,6 +58,7 @@
               <span class="chip">Next.js</span>
               <span class="chip">Node.js</span>
               <span class="chip">Spring Boot</span>
+              <span class="chip">FastAPI</span>
               <span class="chip">Django</span>
               <span class="chip">Flask</span>
             </div>
@@ -89,6 +91,89 @@
       <section aria-labelledby="projects-title">
         <h2 class="section-title" id="projects-title">Featured Projects</h2>
         <div class="grid grid-3 project-grid">
+          <article class="card glass project-card" data-flip>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="project-thumb" role="img" aria-label="Security Vulnerability Intelligence thumbnail" style="background-image: url('/assets/projects/security-vulnerability-intelligence.png'); background-size: cover; background-position: center;"></div>
+                <h3>Security Vulnerability Intelligence</h3>
+                <p>Maps a project's exact dependencies to known vulnerabilities, with a local RAG layer for cited fixes.</p>
+                <div class="chips">
+                  <span class="chip">Python</span>
+                  <span class="chip">FastAPI</span>
+                  <span class="chip">PostgreSQL</span>
+                  <span class="chip">pgvector</span>
+                  <span class="chip">Redis</span>
+                  <span class="chip">Docker</span>
+                </div>
+                <div class="project-links">
+                  <a class="btn" href="https://github.com/abdullah-mohsin1/security-vulnerability-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <button class="btn btn-ghost" type="button" data-flip-toggle aria-pressed="false">Learn More</button>
+                </div>
+              </div>
+              <div class="card-face card-back">
+                <h3>Security Vulnerability Intelligence</h3>
+                <p>
+                  A defensive security platform that reads an app's npm lockfile, rebuilds the exact dependency tree (including transitive packages) and checks each version against trusted OSV advisories. The matching, KEV enrichment and scoring stay deterministic, and a local-first hybrid RAG pipeline (Ollama, pgvector and specialist analyst agents) is being built on top to explain each finding with cited remediation. It's built in milestones with async SQLAlchemy, Alembic migrations and CI.
+                </p>
+                <button class="btn btn-ghost" type="button" data-flip-toggle aria-pressed="true">Back</button>
+              </div>
+            </div>
+          </article>
+          <article class="card glass project-card" data-flip>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="project-thumb" role="img" aria-label="System Monitor thumbnail" style="background-image: url('/assets/projects/system-monitor.jpg'); background-size: cover; background-position: center;"></div>
+                <h3>System Monitor</h3>
+                <p>Live Linux observability dashboard served by a C++ REST API.</p>
+                <div class="chips">
+                  <span class="chip">C++17</span>
+                  <span class="chip">CMake</span>
+                  <span class="chip">JavaScript</span>
+                  <span class="chip">Chart.js</span>
+                  <span class="chip">Docker</span>
+                </div>
+                <div class="project-links">
+                  <a class="btn" href="https://github.com/abdullah-mohsin1/system-monitor" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <button class="btn btn-ghost" type="button" data-flip-toggle aria-pressed="false">Learn More</button>
+                </div>
+              </div>
+              <div class="card-face card-back">
+                <h3>System Monitor</h3>
+                <p>
+                  A lightweight system observability tool that reads CPU, per-core, memory, disk and process metrics straight from /proc and statvfs(), then serves them as JSON from a multithreaded C++ server. The same server hosts a dependency-free dashboard with live history charts and a searchable, sortable list of the busiest processes. It runs with no agent, database or framework, and the parsers are unit tested.
+                </p>
+                <button class="btn btn-ghost" type="button" data-flip-toggle aria-pressed="true">Back</button>
+              </div>
+            </div>
+          </article>
+          <article class="card glass project-card" data-flip>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="project-thumb" role="img" aria-label="All In thumbnail" style="background-image: url('/assets/projects/all-in.png'); background-size: cover; background-position: center;"></div>
+                <h3>All In</h3>
+                <p>Restaurant owners text an AI agent that updates their ordering dashboard and checks its own work.</p>
+                <div class="chips">
+                  <span class="chip">TypeScript</span>
+                  <span class="chip">Node.js</span>
+                  <span class="chip">Playwright</span>
+                  <span class="chip">MongoDB</span>
+                  <span class="chip">Claude API</span>
+                  <span class="chip">Raindrop</span>
+                </div>
+                <div class="project-links">
+                  <a class="btn" href="https://github.com/donna-ownerorbit/ownerorbit-hackathon" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <button class="btn btn-ghost" type="button" data-flip-toggle aria-pressed="false">Learn More</button>
+                </div>
+              </div>
+              <div class="card-face card-back">
+                <h3>All In</h3>
+                <p>
+                  Middleware for food businesses, built as a team for the OwnerOrbit hackathon. Owners text "Donna" over iMessage to mark items sold out or change prices, and the agent makes the change on the restaurant's real dashboard. I built the middleware layer: verified Playwright browser skills that make each change, re-read the result on a fresh page and push menus to delivery providers; confirmation agents; Raindrop tracing with deterministic evals; and the MongoDB setup.
+                </p>
+                <button class="btn btn-ghost" type="button" data-flip-toggle aria-pressed="true">Back</button>
+              </div>
+            </div>
+          </article>
           <article class="card glass project-card" data-flip>
             <div class="card-inner">
               <div class="card-face card-front">

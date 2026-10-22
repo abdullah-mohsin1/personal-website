@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DraftWorks: plan to elevation — Abdullah Mohsin</title>
+<meta name="description" content="DraftWorks derives a dimensioned exterior elevation from an existing residential plan set. One real project, input and generated output.">
+<meta property="og:title" content="DraftWorks: plan to elevation">
+<meta property="og:description" content="A residential plan set in, a dimensioned north elevation generated out.">
+<meta property="og:image" content="https://abdullahmohsin.ca/draftworks/elevation.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Drawing sheet, set in the site's dark navy. Title block, two plates, notes row. */
+:root{
+  --bg:#070914; --surface:#0e1222; --ink:#e8f0ff; --muted:#8c99b8; --line:#1d2436;
+  --accent:#5ad1e6; --plate:#0b0e13; --plate-line:#232b38;
+  --display:"Space Grotesk",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--display);margin:0;
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));
+  padding-block:32px 64px}
+img{max-width:100%}
+.sheet{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+
+.back{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent)}
+
+.titleblock{border:1px solid var(--line);background:var(--surface);display:grid;
+  grid-template-columns:1fr auto}
+.tb-main{padding:20px 22px;display:flex;flex-direction:column;gap:7px;min-width:0}
+h1{font-weight:700;font-size:clamp(23px,3.4vw,33px);letter-spacing:-.02em;margin:0;
+  line-height:1.1;text-wrap:balance}
+.sub{color:var(--muted);font-size:15px;max-width:62ch}
+.tb-meta{border-left:1px solid var(--line);font:500 11px/1 var(--mono);align-content:start}
+.tb-meta div{padding:11px 16px;border-bottom:1px solid var(--line);display:flex;gap:16px;
+  justify-content:space-between;white-space:nowrap}
+.tb-meta div:last-child{border-bottom:0}
+.tb-meta span{color:var(--muted);letter-spacing:.06em}
+.tb-meta b{font-weight:500;color:var(--ink)}
+
+figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.plate-label{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0;
+  font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.plate-label b{color:var(--accent);font-weight:500}
+.plate{background:var(--plate);border:1px solid var(--plate-line);padding:10px;overflow-x:auto}
+.plate img{display:block;height:auto;min-width:640px}
+figcaption{color:var(--muted);font-size:14.5px;max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+
+.notes{border-top:1px solid var(--line);padding-top:24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+.note{display:flex;flex-direction:column;gap:7px;min-width:0}
+.note h2{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0}
+.note p{margin:0;font-size:14.5px}
+.note p+p{color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding-top:20px;display:flex;flex-wrap:wrap;
+  gap:8px 24px;align-items:baseline;font-size:14.5px;color:var(--muted)}
+footer b{color:var(--ink);font-weight:600}
+footer .mono{font-family:var(--mono);font-size:13px;-webkit-user-select:all;user-select:all}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:620px){
+  .titleblock{grid-template-columns:1fr}
+  .tb-meta{border-left:0;border-top:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <a class="back" href="/">&larr; Abdullah Mohsin</a>
+
+  <div class="titleblock">
+    <div class="tb-main">
+      <h1>Floor plan in, elevation out</h1>
+      <p class="sub">DraftWorks derives a dimensioned exterior elevation from an existing residential plan set and a set of known vertical measurements. Below is one real project, input and generated output, with the client's details removed.</p>
+    </div>
+    <div class="tb-meta">
+      <div><span>PROJECT</span><b>Residential, 3 levels</b></div>
+      <div><span>SHEET</span><b>North elevation</b></div>
+      <div><span>SCALE</span><b>As noted</b></div>
+    </div>
+  </div>
+
+  <figure>
+    <p class="plate-label"><b>Input</b> <span>Plan set, three levels, AutoCAD</span></p>
+    <div class="plate"><img src="plans.png" alt="AutoCAD plan set showing proposed basement plan, ground floor plan and upper floor plan for a residential project" width="1986" height="740"></div>
+    <figcaption>Basement, ground and upper floor plans as drawn. Wall runs, openings, fixtures and room labels across three levels, with the garage and porch areas marked unexcavated below.</figcaption>
+  </figure>
+
+  <figure>
+    <p class="plate-label"><b>Output</b> <span>North elevation, generated</span></p>
+    <div class="plate"><img src="elevation.png" alt="Generated north elevation drawing showing wall extents, five tagged windows, floor datum lines at zero and eight feet, a window schedule table and a dimension chain totalling forty seven feet six inches" width="1860" height="780"></div>
+    <figcaption>Openings are carried through from the plan and tagged <b>W1</b> to <b>W5</b>, each resolved into the schedule with its size and sill height. Floor datums land at <b>0'-0"</b> and <b>8'-0"</b>, and the dimension chain closes at <b>47'-6"</b>. Nothing on this sheet was drawn by hand.</figcaption>
+  </figure>
+
+  <div class="notes">
+    <div class="note">
+      <h2>What generates today</h2>
+      <p>Wall extents, opening placement, window tagging and schedule, floor datums, and a closed dimension chain.</p>
+      <p>Vertical geometry comes from known floor-to-floor measurements rather than inference.</p>
+    </div>
+    <div class="note">
+      <h2>What does not, yet</h2>
+      <p>Roof geometry and exterior detailing.</p>
+      <p>Pitch is not recoverable from a 2D plan, so it has to come from the 3D scan rather than a guess. That is the next piece of work, along with reconciling hand-written site measurements against the scan.</p>
+    </div>
+    <div class="note">
+      <h2>Why it is hard</h2>
+      <p>Plan sets disagree with themselves.</p>
+      <p>The same opening appears at two widths across sheets, so the pipeline has to normalise conflicting measurements into one consistent model before any geometry can be drawn.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span><b>Abdullah Mohsin</b>, founder of DraftWorks</span>
+    <span class="mono">abdullahmohsin.ca</span>
+    <span class="mono">abdullahmohsin010@gmail.com</span>
+  </footer>
+
+</div>
+</body>
+</html>
